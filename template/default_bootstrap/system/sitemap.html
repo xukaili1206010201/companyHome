@@ -1,0 +1,80 @@
+{template 'header.html'}
+
+{template 'system/cslide.html'}
+
+
+<div class="container sitemap-list">
+
+<div class="blank30"></div>
+
+
+
+<div class="title">
+<h3 class="wow fadeInDown" data-wow-delay="0.5s"><a>{lang(sitemap)}<small>Site Map</small></a></h3>
+<span>——</span>
+</div>
+
+<style type="text/css">
+.sitemap-list h3 {clear:both;padding:30px 0px;color:#337ab7;}
+.sitemap-list h3 a {color:#337ab7;}
+	.sitemap-list li {float:left;margin:5px 15px;}
+	.title h3 {padding:0px;}
+</style>
+
+<div class="blank30"></div>
+
+
+<!-- 正文 -->
+{loop categories_nav() $t}
+
+<h3><a href="{$t[url]}"{if config::get('nav_blank')==1} target=" _blank"{/if}>{$t[catname]}</a></h3>
+
+
+<ul>
+{loop categories($t[catid]) $t1}
+<li>
+<a title="{$t1[catname]}" href="{$t1[url]}">{$t1[catname]}</a>
+
+<ul class="three dropdown-menu">
+{loop categories($t1[catid]) $t2}
+<li>
+<a title="{$t2[catname]}" href="{$t2[url]}">{$t2[catname]}</a>
+
+<ul class="four dropdown-menu">
+{loop categories($t2[catid]) $t3}
+<li>
+<a title="{$t3[catname]}" href="{$t3[url]}">{$t3[catname]}</a>
+
+<ul class="five dropdown-menu">
+{loop categories($t3[catid]) $t4}
+<li>
+<a title="{$t4[catname]}" href="{$t4[url]}">{$t4[catname]}</a>
+</li>
+{/loop}
+</ul>
+
+</li>
+{/loop}
+</ul>
+
+</li>
+{/loop}
+</ul>
+
+</li>
+{/loop}
+</ul>
+
+</li>
+{/loop}
+<div class="blank20"></div>
+
+<?php if(hasflash()) { ?>
+<div style="color:red;font-size:16px;"><?php echo showflash(); ?></div><?php } ?>
+
+<div class="blank30"></div>
+
+</div>
+
+
+{template 'footer.html'}
